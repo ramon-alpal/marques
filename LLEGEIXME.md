@@ -125,7 +125,7 @@ de casos per a ficar el que vulguis ficar.
 ### El Nom
 
 El nom del programa de `marquès` és de la simple casualitat de que
-concorda amb marques.
+concorda amb `marques`.
 
 ### Altres Notes
 

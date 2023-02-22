@@ -36,13 +36,13 @@ the installation:
 
     git clone 'https://github.com/ramon-alpal/marques'
     cd marques
-    sudo sh produ ca inst
+    sudo sh produ en install
 
 During the installation you will be asked a user for installing it the
 local configuration's file.
 
 You can optionally make a local installation modifying the heading's
-variables of the script `produ`' or changing the environment variable
+variables of the script `produ` or changing the environment variable
 `$PREF`.
 
 ## Configuration and Usage
@@ -130,9 +130,9 @@ actually has no relation to that, it's just from the simple casualty
 that it matches with the Catalan word `marques`, without accent, that
 means marks.
 
-You could pronounced in Catalan if you can, it would be /mar'kɛs/. But I
-don't really care that much of these kind of games so you could pronounces
-as the equivalent English wort `marquess`.
+You could pronounced in Catalan if you can, it would be `/mar'kɛs/`. But
+I don't really care that much of these kind of games so you could
+pronounces as the equivalent English wort `marquess`.
 
 ### Other Notes
 
