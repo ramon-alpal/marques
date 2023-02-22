@@ -1,0 +1,88 @@
+#!/bin/sh
+# marquès - MARQUES de fitxers de tota mena i d'accions de tota mena
+#
+# Copyright (C) 2023 Ramon Alpal
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Menu() { fzf --exact --reverse --no-sort --prompt="${1} "; }
+#Menu() { dmenu -i -l 20 -p "$1"; }
+#Menu() { vis-menu -t -i -l $(($(tput lines)-1)) -p "$1"; }
+fixl=${XDG_CONFIG_HOME:-$HOME/.config}/marques.conf
+fixg=/usr/local/share/marques.conf
+dir_cau=${XDG_CACHE_HOME:-$HOME/.cache}
+fix_cau=$dir_cau/marques
+EDITOR=${EDITOR:-vi}
+
+# Generar fitxer de memòria cau
+[ $fixl -nt $fix_cau -o $fixg -nt $fix_cau -o ! -f $fix_cau ] && {
+  [ ! -d $dir_cau ] && mkdir -p $dir_cau
+  { [ -f $fixl ] && echo $fixl
+  [ -f $fixg ] && echo $fixg
+  } | xargs -r cat | expand | sed '/^\s*#\|^$/ d; s/^\s*//g' > $fix_cau
+}
+
+# CoManDament del LS(1)
+cmd_ls() {
+  clear; ls --color=always --literal --group-directories-first ${1:-./}
+}
+
+elec="$(Menu 'Marques:' < $fix_cau)" || return 0
+elec="$(echo "$elec" | tr -s ' ' ' ')"
+tip="${elec#* }"; tip=${tip% *}
+eval marca=${elec##* }
+dir=${marca%/*}
+
+[ ! -e $marca ] &&
+  printf '\n%s\n\n' "Directori o Fitxer Inexistent" && return 1
+
+case $tip in
+  # *Copiar* el fitxer, especialment útil per a llicencies
+  c)
+  cp -f $marca ./
+  cmd_ls
+  ;;
+  # Obrir el *Directori*
+  d)
+  cd $marca
+  cmd_ls
+  ;;
+  # Obrir el *Fitxer*
+  f)
+  cd $dir
+  cmd_ls
+  $EDITOR $marca
+  ;;
+  # (*Meta* copiar) copiar tots els fitxers dins del directori
+  m)
+  confirm=$(printf '%s\n' Si No |
+  Menu "¿Segur que vols copiar tots els fitxers de <${marca}>?:") ||
+    return 0
+  case $confirm in [sS]|[sS][iI]) ;; [nN]|[nN][oO]|*) return 0 ;; esac
+  { find $marca ! -path "$marca" | xargs realpath
+    printf '%s\n' './'
+  } | xargs cp
+  cmd_ls
+  ;;
+  # Obrir i copiar el fitxer, especialment útil per a *Plantilles*
+  p)
+  cp -f $marca ./
+  cmd_ls
+  $EDITOR ./${marca##*/}
+  ;;
+  # Copiar el contingut del fitxer al portapapers *d'X11*
+  x)
+  xclip -selection clipboard < $marca
+  ;;
+esac

@@ -1,0 +1,88 @@
+#!/bin/sh
+# marquès - MARKS of files of all kinds and of actions of all kinds
+#
+# Copyright (C) 2023 Ramon Alpal
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Menu() { fzf --exact --reverse --no-sort --prompt="${1} "; }
+#Menu() { dmenu -i -l 20 -p "$1"; }
+#Menu() { vis-menu -t -i -l $(($(tput lines)-1)) -p "$1"; }
+lfile=${XDG_CONFIG_HOME:-$HOME/.config}/marques.conf
+gfix=/usr/local/share/marques.conf
+cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+cache_file=$cache_dir/marques
+EDITOR=${EDITOR:-vi}
+
+# Generate the cache file
+[ $lfile -nt $cache_file -o $gfix -nt $cache_file -o ! -f $cache_file ] && {
+  [ ! -d $cache_dir ] && mkdir -p $cache_dir
+  { [ -f $lfile ] && echo $lfile
+  [ -f $gfix ] && echo $gfix
+  } | xargs -r cat | expand | sed '/^\s*#\|^$/ d; s/^\s*//g' > $cache_file
+}
+
+# LS CoManD
+ls_cmd() {
+  clear; ls --color=always --literal --group-directories-first ${1:-./}
+}
+
+elec="$(Menu 'Marks:' < $cache_file)" || return 0
+elec="$(echo "$elec" | tr -s ' ' ' ')"
+type="${elec#* }"; type=${type% *}
+eval mark=${elec##* }
+dir=${mark%/*}
+
+[ ! -e $mark ] &&
+  printf '\n%s\n\n' "Directory or File Unexistent" && return 1
+
+case $type in
+  # *Copy* the file, specially useful for licenses
+  c)
+  cp -f $mark ./
+  ls_cmd
+  ;;
+  # Open the *Directory*
+  d)
+  cd $mark
+  ls_cmd
+  ;;
+  # Open the *File*
+  f)
+  cd $dir
+  ls_cmd
+  $EDITOR $mark
+  ;;
+  # (*Meta* copy) copy all the files inside a directory
+  m)
+  confirm=$(printf '%s\n' Si No |
+  Menu "Are you sure that you want to copy all the fils of <${mark}>?:") ||
+    return 0
+  case $confirm in [sS]|[sS][iI]) ;; [nN]|[nN][oO]|*) return 0 ;; esac
+  { find $mark ! -path "$mark" | xargs realpath
+    printf '%s\n' './'
+  } | xargs cp
+  ls_cmd
+  ;;
+  # Open and copy the file, specially useful for *Templates*
+  t)
+  cp -f $mark ./
+  ls_cmd
+  $EDITOR ./${mark##*/}
+  ;;
+  # Copy the contents of the file to the *X11's* clipboard
+  x)
+  xclip -selection clipboard < $mark
+  ;;
+esac

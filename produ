@@ -1,0 +1,48 @@
+#!/bin/sh
+# produ - PRODUir de diferents maneres el 'marquès'
+
+
+export PREF=${PREF:-/usr/local}
+
+# Triar Usuari
+printf '%s' "Usuari: "; read usu; [ -z "$usu" ] && exit 1
+[ ! -e "/home/$usu" ] && printf '%s\n' "Usuari '$usu' inexistent" && exit 1
+export XDG_CONFIG_HOME=/home/$usu/.config
+
+
+# INSTal·la TOT
+# ARG1 és la llengua
+inst_tot() {
+	mkdir -p $PREF/bin
+	cp -f marques-$llen $PREF/bin/marques
+	chmod 755 $PREF/bin/marques
+	mkdir -p $XDG_CONFIG_HOME
+	cp -f marques-local-${llen}.conf $XDG_CONFIG_HOME/marques.conf
+	chmod 600 $XDG_CONFIG_HOME/marques.conf
+	chown $usu:$(groups $usu) $XDG_CONFIG_HOME/marques.conf
+	mkdir -p $PREF/share
+	cp -f marques-global-${llen}.conf $PREF/share/marques.conf
+	chmod 644 $PREF/share/marques.conf
+}
+
+# DESINSTal·la TOT
+desinst_tot() {
+	rm -f $PREF/bin/marques\
+		$XDG_CONFIG_HOME/marques.conf\
+		$PREF/share/marques.conf
+}
+
+
+[ $# -lt 1 ] && printf '\n%s\n\n' \
+  "Proveeix arguments, consulta 'README.md' per a instruccions"
+llen=ca
+# Bucle Manejador d'Arguments
+while [ $# -gt 0 ]; do case "$1" in
+  ca|en)
+    llen=$1 ;;
+  inst|inst-tot|install|install-all)
+    inst_tot ;;
+  desinst|desinst-tot|uninstall|uninstall-all)
+    desinst_tot ;;
+  *) printf '\n%s\n\n' "Argument '$1' invalid"; exit 1 ;;
+esac; shift 1; done
