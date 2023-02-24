@@ -9,8 +9,8 @@ Marques de fitxers de tota mena i d'accions de tota mena
 Aquest repositori té dos versions dels fitxers: la original en Català
 i la derivada en Anglès.
 
-Mireu el fitxer `README` si parleu Anglès en ves d'aquest fitxer que
-teniu ara obert.
+Vegeu el fitxer [`README`](./README.md) si parleu Anglès en ves d'aquest
+fitxer que teniu ara obert.
 
 ## Descripció
 
@@ -30,9 +30,10 @@ Com a interfície s'utilitza programes com el `fzf` o `dmenu`.
 
 Per a poder utilitzar el guió necessites els següents paquets
 instaŀlats:
+
 - El programa `fzf` per a utilitzar-lo com a interfície de menú,
   o altres com el `dmenu` o `vis-menu` amb un parell d'adaptacions que
-  trobaràs a les notes;
+  trobaràs a les [notes](#Notes);
 - El programa `xclip` per a poder interactuar amb el portapapers d'X11;
 - Una closca (Shell) interactiva capaç de suportar l'estàndard POSIX
   i capaç de crear lligadures, com per exemple `bash` i `zsh`;
@@ -83,7 +84,8 @@ fitxer de configuració que em utilitzat anteriorment:
 
     export EDITOR=vim
 
-També hi ha unes quantes coses més insulars que trobaràs a les notes.
+També hi ha unes quantes coses més insulars que trobaràs a les
+[notes](#Notes).
 
 Ara el guió ja és completament funcional, l'únic que et queda és
 afegir les teves pròpies marques per a començar-li a donar ús.

@@ -9,8 +9,8 @@ Marks of files of all kinds and actions of all kinds
 This repository has two versions of the files: the original one in
 Catalan and the derived one in English.
 
-See the file `LLEGEIXME` if you speak Catalan instead of this file you
-have now opened.
+See the file [`LLEGEIXME`](./LLEGEIXME.md) if you speak Catalan instead
+of this file you have now opened.
 
 ## Description
 
@@ -28,9 +28,10 @@ As the interface is used programs like `fzf` or `dmenu`.
 ## Requirements
 
 In order to use the script you need the following packages installed:
+
 - The `fzf` program to be used as a menu interface, or others like
   `dmenu` or `vis-menu` with a couple of adaptations that you will find
-  on the notes;
+  on the [notes](#Notes);
 - The `xclip` program in order to be able to interact with the X11's
   clipboard;
 - An interactive shell capable of supporting the POSIX standard and
@@ -83,8 +84,8 @@ line into the respective configuration's file that we used previously:
 
     export EDITOR=vim
 
-There is also some more other insular things that you will find on
-the notes.
+There is also some more other insular things that you will find on the
+[notes](#Notes).
 
 Now the script is completely functional, the only thing that it's missing
 is adding your own marks for beginning to give it use.
