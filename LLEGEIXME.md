@@ -19,10 +19,10 @@ fitxers i directoris amb un nom i una acció.
 
 Per exemple: Jo tinc una marca nomenada `crepo` que té com a ruta un
 directori ple de fitxers plantilla per a crear un repositori, aquesta
-marca al ser seŀleccionada li tinc una acció que em copia al directori
-actual tots els fitxers plantantilla. També en tinc una altra que té
-la mateixa ruta però es nomenada `platrepo` i li tinc la acció de
-canviar de directori.
+marca al ser seleccionada li tinc una acció que em copia al directori
+actual tots els fitxers plantilla. També en tinc una altra que té la
+mateixa ruta però es nomenada `platrepo` i li tinc la acció de canviar
+de directori.
 
 Com a interfície s'utilitza programes com el `fzf` o `dmenu`.
 
@@ -34,7 +34,7 @@ instaŀlats:
   o altres com el `dmenu` o `vis-menu` amb un parell d'adaptacions que
   trobaràs a les notes;
 - El programa `xclip` per a poder interactuar amb el portapapers d'X11;
-- Una closca (shell) interactiva capaç de suportar l'estàndard POSIX
+- Una closca (Shell) interactiva capaç de suportar l'estàndard POSIX
   i capaç de crear lligadures, com per exemple `bash` i `zsh`;
 - Qualsevol editor de text, com per exemple `vim` o `vi`;
 - I utilitats bàsiques com `cp`, `ls`, `find` i `sed`.
@@ -118,7 +118,7 @@ una de les dos altres del `demnu` i `vis-menu`.
 També pots crear la teva pròpia funció si utilitzes un programa
 que no sigui ningun dels tres, l'únic que has de fer principalment
 és inserir el primer argument de la funció a on correspongui l'avís
-(prompt) del menú.
+(Prompt) del menú.
 
 Per cert, Jo recomano utilitzar el `vis-menu` per sobre del `fzf`. És
 com el `dmenu` però a la terminal, el petit problema és que és part
@@ -143,9 +143,9 @@ amb `marques`.
 ### Altres Notes
 
 - Per a poder utilitzar el guió ha de ser executat a la closca actual,
-  per a tal s'ha d'importar el guió amb `. /ruta/guio`, especialment per
-  a canviar de directori. Això és el que pot causar que no es pugui
-  utilitzar en closques (shells) que no segueixen l'estàndard POSIX,
+  per a tal s'ha d'importar el guió amb `. /ruta/guio`, especialment
+  per a canviar de directori. Això és el que pot causar que no es
+  pugui utilitzar en closques que no segueixen l'estàndard POSIX,
   com per exemple `fish`.
 - Per a obrir fitxer es podria utilitzar `xdg-open` en ves del `$EDITOR`,
-  ja que no tots els fitxers a obrir seràn de text.
+  ja que no tots els fitxers a obrir seran fetes de text.

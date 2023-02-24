@@ -83,7 +83,7 @@ line into the respective configuration's file that we used previously:
 
     export EDITOR=vim
 
-There is also some more other insular thing that you will find on
+There is also some more other insular things that you will find on
 the notes.
 
 Now the script is completely functional, the only thing that it's missing
@@ -114,8 +114,8 @@ to use `~/.config`.
 
 By default the `fzf` program is used as the menu interface, but you
 can change it by disabling from the script the function situated at the
-heading named `Menu` from the `fzf` and enabling one of the tow others
-from the `dmenu` and `vis-menu`.
+heading named `Menu` from `fzf` and enabling one of the tow others from
+`dmenu` and `vis-menu`.
 
 You can also create your own functions if you use a program that isn't
 one of the three, the only main thing that you have to do is inserting the
@@ -155,4 +155,4 @@ pronounces as the equivalent English wort `marquess`.
   what can cause to not be able to be use in shells that don't follow
   the POSIX standard, like for example `fish`.
 - For opening files you could use `xdg-open` instead of the `$EDITOR`,
-  as not all the files to be opened will be of text.
+  as not all the files to be opened made will be of text.
