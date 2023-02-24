@@ -12,10 +12,24 @@ i la derivada en Anglès.
 Mireu el fitxer `README` si parleu Anglès en ves d'aquest fitxer que
 teniu ara obert.
 
+## Descripció
+
+Aquest guió (script) et permet tindre un fitxer per a ficar rutes a
+fitxers i directoris amb un nom i una acció.
+
+Per exemple: Jo tinc una marca nomenada `crepo` que té com a ruta un
+directori ple de fitxers plantilla per a crear un repositori, aquesta
+marca al ser seŀleccionada li tinc una acció que em copia al directori
+actual tots els fitxers plantantilla. També en tinc una altra que té
+la mateixa ruta però es nomenada `platrepo` i li tinc la acció de
+canviar de directori.
+
+Com a interfície s'utilitza programes com el `fzf` o `dmenu`.
+
 ## Requeriments
 
-Per a poder utilitzar el programa necessites els següents paquets
-instal·lats:
+Per a poder utilitzar el guió necessites els següents paquets
+instaŀlats:
 - El programa `fzf` per a utilitzar-lo com a interfície de menú,
   o altres com el `dmenu` o `vis-menu` amb un parell d'adaptacions que
   trobaràs a les notes;
@@ -25,34 +39,33 @@ instal·lats:
 - Qualsevol editor de text, com per exemple `vim` o `vi`;
 - I utilitats bàsiques com `cp`, `ls`, `find` i `sed`.
 
-## Instal·lació
+## Instaŀlació
 
 Després d'haver satisfet els requeriments pots començar amb la
-instal·lació.
+instaŀlació.
 
-Per a instal·lar el programa executa la següent llista de comandaments
-a la teva closca (shell) per a baixar el repositori, canviar de directori
-i produir la instal·lació:
+Per a instaŀlar el guió executa la següent llista de comandaments
+a la teva closca per a baixar el repositori, canviar de directori i
+produir la instaŀlació:
 
     git clone 'https://github.com/ramon-alpal/marques'
     cd marques
     sudo sh produ ca inst
 
-Durant la instal·lació se't preguntarà un usuari per a instal·lar-li
+Durant la instaŀlació se't preguntarà un usuari per a instaŀlar-li
 el fitxer de configuració local.
 
-Pots optativament fer una instal·lació local modificant les variables de
-la capçalera del guió (script) `produ` o canviant la variable ambiental
-`$PREF`.
+Pots optativament fer una instaŀlació local modificant les variables de
+la capçalera del guió `produ` o canviant la variable ambiental `$PREF`.
 
 ## Configuració i Utilització
 
-Després de la instal·lació hauràs de configurar un parell de coses
-més per a poder començar a utilitzar el programa.
+Després de la instaŀlació hauràs de configurar un parell de coses
+més per a poder començar a utilitzar el guió.
 
 Has d'afegir, si utilitzes `bash`, al teu fitxer de configuració
 `.bashrc` la següent línia per a poder crear una lligadura a `Control-O`
-del programa:
+del guió:
 
     bind -x '"\C-o":". /usr/local/bin/marques"'
 
@@ -72,25 +85,25 @@ fitxer de configuració que em utilitzat anteriorment:
 
 També hi ha unes quantes coses més insulars que trobaràs a les notes.
 
-Ara el programa ja és completament funcional, l'únic que et queda és
+Ara el guió ja és completament funcional, l'únic que et queda és
 afegir les teves pròpies marques per a començar-li a donar ús.
 
-En el proces d'instal·lació s'ha creat un fitxer de configuració local
+En el proces d'instaŀlació s'ha creat un fitxer de configuració local
 i global a `~/.config/marques.conf` i a `/usr/local/share/marques.conf`
 respectivament amb totes les instruccions de com la configuració és
 estructurada en comentaris i amb múltiples de les meves pròpies marques.
 
 ## Absent
 
-El guió (script) productor de la instal·lació titulat `produ` té
-una forma de triar usuari que és primitiva i anti-estàndards.
+El guió productor de la instaŀlació titulat `produ` té una forma de
+triar usuari que és primitiva i anti-estàndards.
 
-No sé una bona manera de com fer que el `produ` pugui instal·lar
+No sé una bona manera de com fer que el `produ` pugui instaŀlar
 localment i globalment sense haver de ficar `sudo` davant de cada
-instància que correspongui a la instal·lació global.
+instància que correspongui a la instaŀlació global.
 
 Aquest problema no em permet utilitzar apropiadament la variable ambiental
-`$XDG_CONFIG_HOME` durant la instal·lació, resultant en que he de fer
+`$XDG_CONFIG_HOME` durant la instaŀlació, resultant en que he de fer
 servir `~/.config`.
 
 ## Notes
@@ -98,7 +111,7 @@ servir `~/.config`.
 ### Interfície de Menú
 
 De forma predeterminada s'utilitzarà el programa `fzf` com a la
-interfície de menú, però pots canviar-ho desactivant del programa la
+interfície de menú, però pots canviar-ho desactivant del guió la
 funció situada a la capçalera titulada `Menu` del `fzf` per activar
 una de les dos altres del `demnu` i `vis-menu`.
 
@@ -113,26 +126,26 @@ de l'editor de text [`vis`](https://github.com/martanne/vis).
 
 ### Canviar el Comandament d'LS
 
-Pots editar el comandament `ls` per el que vulguis editant del programa
-la funció `cmd_ls`.
+Pots editar el comandament `ls` per el que vulguis editant del guió la
+funció `cmd_ls`.
 
 ### Extendre el Programa
 
-Pots extendre el programa per a fer mil coses diferents afegint més
-tipus d'accions, per a tal el programa té cap al final una instrucció
-de casos per a ficar el que vulguis ficar.
+Pots extendre el guió per a fer mil coses diferents afegint més tipus
+d'accions, per a tal el guió té cap al final una instrucció de casos
+per a ficar el que vulguis ficar.
 
 ### El Nom
 
-El nom del programa de `marquès` és de la simple casualitat de que
-concorda amb `marques`.
+El nom del guió de `marquès` és de la simple casualitat de que concorda
+amb `marques`.
 
 ### Altres Notes
 
-- Per a poder utilitzar el programa ha de ser executat a la closca (shell)
-  actual, per a tal s'ha d'importar el programa amb `. /ruta/programa`,
-  especialment per a canviar de directori. Això és el que pot causar que
-  no es pugui utilitzar en closques (shells) que no segueixen l'estàndard
-  POSIX, com per exemple `fish`.
+- Per a poder utilitzar el guió ha de ser executat a la closca actual,
+  per a tal s'ha d'importar el guió amb `. /ruta/guio`, especialment per
+  a canviar de directori. Això és el que pot causar que no es pugui
+  utilitzar en closques (shells) que no segueixen l'estàndard POSIX,
+  com per exemple `fish`.
 - Per a obrir fitxer es podria utilitzar `xdg-open` en ves del `$EDITOR`,
   ja que no tots els fitxers a obrir seràn de text.

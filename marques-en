@@ -76,7 +76,7 @@ case $type in
   ls_cmd
   ;;
   # Open and copy the file, specially useful for *Templates*
-  t)
+  p)
   cp -f $mark ./
   ls_cmd
   $EDITOR ./${mark##*/}
