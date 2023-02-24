@@ -23,7 +23,7 @@ selected has an action that will copy me to the current directory all
 the template files. Also I have another one that has the same route but
 with is named `platrepo` and it has the action to change the directory.
 
-As the interface programs like `fzf` or `dmenu` are use.
+As the interface are used programs like `fzf` or `dmenu`.
 
 ## Requirements
 
